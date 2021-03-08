@@ -124,3 +124,32 @@
   let arr: any = [];
   arr.push(1, true, {});
 })();
+
+/**
+ * Example 8 (適用 Unknown)
+ * 較為嚴格的 any，但同樣不建議使用
+ * 需先透過 typeof 確認型態，後續才能賦予其他對象
+ */
+
+(() => {
+  let a: unknown;
+  let b: string;
+  a = 10;
+  a = 'Hello World';
+  if (typeof a === 'string') {
+    b = a;
+  }
+})();
+
+/**
+ * Example 9 (適用 Never)
+ * 宣告即自動推斷型態
+ * 通常用於無回傳的對象 (就連 undefined 也不會回傳)
+ */
+
+(() => {
+  const errorHandling = (message: string, code: number): never => {
+    throw { message, code };
+  };
+  // errorHandling('token expired！', 401);
+})();
